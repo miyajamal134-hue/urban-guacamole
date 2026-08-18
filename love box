@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>একটা ছোট্ট সারপ্রাইজ ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    overflow: hidden;
+}
+
+.container {
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 35px;
+}
+
+.open-text {
+    font-size: 20px;
+    cursor: pointer;
+    background: white;
+    color: #ff4f81;
+    padding: 15px 25px;
+    border-radius: 30px;
+    display: inline-block;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: 0.3s;
+}
+
+.open-text:hover {
+    transform: scale(1.05);
+}
+
+/* Box */
+.box {
+    width: 170px;
+    height: 130px;
+    background: #e91e63;
+    margin: 30px auto;
+    position: relative;
+    cursor: pointer;
+    border-radius: 0 0 10px 10px;
+    display: none;
+}
+
+.box::before {
+    content: "";
+    position: absolute;
+    width: 35px;
+    height: 130px;
+    background: #ffd54f;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.lid {
+    position: absolute;
+    width: 190px;
+    height: 35px;
+    background: #d81b60;
+    top: -30px;
+    left: -10px;
+    border-radius: 8px;
+    transition: 0.8s;
+}
+
+.lid::after {
+    content: "";
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background: #ffd54f;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Message */
+.message {
+    display: none;
+    font-size: 42px;
+    font-weight: bold;
+    animation: pop 1s ease;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    70% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.heart {
+    position: absolute;
+    font-size: 25px;
+    animation: float 5s linear infinite;
+    bottom: -50px;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1 id="title">
+        তুমি কি বক্সটি খুলতে প্রস্তুত? ❤️
+    </h1>
+
+    <div class="open-text" id="openButton">
+        এখানে ক্লিক করো 🎁
+    </div>
+
+    <div class="box" id="box">
+        <div class="lid" id="lid"></div>
+    </div>
+
+    <div class="message" id="message">
+        I Love You ❤️
+    </div>
+
+</div>
+
+<script>
+
+const openButton = document.getElementById("openButton");
+const box = document.getElementById("box");
+const lid = document.getElementById("lid");
+const message = document.getElementById("message");
+const title = document.getElementById("title");
+
+openButton.addEventListener("click", function() {
+
+    openButton.style.display = "none";
+    title.innerHTML = "এই বক্সের ভেতরে তোমার জন্য কিছু আছে... ❤️";
+
+    box.style.display = "block";
+
+});
+
+box.addEventListener("click", function() {
+
+    lid.style.transform = "translateY(-70px) rotate(-10deg)";
+
+    setTimeout(function() {
+
+        box.style.display = "none";
+        title.style.display = "none";
+        message.style.display = "block";
+
+        createHearts();
+
+    }, 700);
+
+});
+
+function createHearts() {
+
+    for(let i = 0; i < 30; i++) {
+
+        const heart = document.createElement("div");
+
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDelay = Math.random() * 3 + "s";
+        heart.style.fontSize = (15 + Math.random() * 25) + "px";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }
+
+}
+
+</script>
+
+</body>
+</html>
